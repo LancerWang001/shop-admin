@@ -27,5 +27,14 @@ export default defineConfig({
         additionalData: '@import "@/styles/variables.scss";\n'
       }
     }
+  },
+  server: {
+    proxy: {
+      // 选项写法
+      '/admin': {
+        target: 'https://shop.fed.lagounews.com/api',
+        changeOrigin: true
+      }
+    }
   }
 })
