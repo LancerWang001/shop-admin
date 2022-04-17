@@ -1,10 +1,10 @@
 <template>
   <el-menu
-    active-text-color="#ffd04b"
+    active-text-color="#3b89da"
     background-color="#304156"
     class="el-menu-vertical-demo"
     :default-active="$route.path"
-    text-color="#fff"
+    text-color="silver"
     :collapse="$store.state.isCollapse"
     router
   >

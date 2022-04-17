@@ -3,11 +3,13 @@ import {
   createWebHashHistory,
   RouteRecordRaw
 } from 'vue-router'
+import nprogress from 'nprogress'
 import AppLayout from '@/layout/AppLayout.vue'
 import productRoute from './modules/product'
 import permissionRoute from './modules/permission'
 import mediaRoute from './modules/media'
 import orderRoute from './modules/order'
+import 'nprogress/nprogress.css'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -39,6 +41,14 @@ const routes: RouteRecordRaw[] = [
 const router = createRouter({
   history: createWebHashHistory(), // 路由模式
   routes
+})
+
+router.beforeEach(() => {
+  nprogress.start() // 开始加载进度条
+})
+
+router.afterEach(() => {
+  nprogress.done() // 结束加载进度条
 })
 
 export default router
