@@ -1,3 +1,4 @@
+import store from '@/store'
 import axios, { AxiosRequestConfig } from 'axios'
 import { ElMessage } from 'element-plus'
 
@@ -6,6 +7,10 @@ const request = axios.create({})
 // 请求拦截器
 request.interceptors.request.use((config) => {
   // 登录授权
+  const user = store.state.user
+  if (user && user.token) {
+    (config.headers = (config.headers || {})).Authorization = `Bearer ${user.token}`
+  }
   return config
 }, Promise.reject.bind(Promise))
 
