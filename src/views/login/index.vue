@@ -47,9 +47,11 @@
             </template>
           </el-input>
           <img
+            v-if="captchaSrc"
+            @click="loadCaptcha"
             class="imgcode"
             alt="验证码"
-            src="https://shop.fed.lagounews.com/api/admin/captcha_pro"
+            :src="captchaSrc"
           >
         </div>
       </el-form-item>
@@ -68,8 +70,15 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
+import { ElForm } from 'element-plus'
+import { useRouter } from 'vue-router'
+import { getCaptch, login } from '@/api/common'
 
+const form = ref<InstanceType<typeof ElForm>>()
+const router = useRouter()
+
+const captchaSrc = ref('')
 const user = reactive({
   account: 'admin',
   pwd: '123456',
@@ -88,8 +97,30 @@ const rules = ref({
   ]
 })
 
+onMounted(() => {
+  loadCaptcha()
+})
+
+const loadCaptcha = async () => {
+  const data = await getCaptch()
+  captchaSrc.value = URL.createObjectURL(data)
+}
+
 const handleSubmit = async () => {
-  console.log('handleSubmit')
+  // 表单验证
+  const valid = await form.value?.validate()
+  if (!valid) return false
+  // 验证通过，展示 loading
+  loading.value = true
+  // 请求提交
+  const data = await login(user).finally(() => {
+    loading.value = false
+  })
+  console.log(data)
+  router.replace({
+    name: 'home'
+  })
+  // 处理响应
 }
 
 </script>
