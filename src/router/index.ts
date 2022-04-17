@@ -3,12 +3,19 @@ import {
   createWebHashHistory,
   RouteRecordRaw
 } from 'vue-router'
+import AppLayout from '@/layout/AppLayout.vue'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'home',
-    component: import(/* home */ '../views/home/index.vue')
+    component: AppLayout,
+    children: [
+      {
+        path: '',
+        name: 'home',
+        component: import(/* home */ '../views/home/index.vue')
+      }
+    ]
   },
   {
     path: '/login',

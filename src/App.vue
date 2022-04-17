@@ -1,11 +1,13 @@
 <script setup lang="ts">
-// This starter template is using Vue 3 <script setup> SFCs
-// Check out https://vuejs.org/api/sfc-script-setup.html#script-setup
+import locale from 'element-plus/lib/locale/lang/zh-cn'
+
 </script>
 
 <template>
-  <!-- 路由的出口 -->
-  <router-view />
+  <el-config-provider :locale="locale">
+    <!-- 路由的出口 -->
+    <router-view />
+  </el-config-provider>
 </template>
 
 <style>
