@@ -5,6 +5,7 @@
     class="el-menu-vertical-demo"
     :default-active="$route.path"
     text-color="#fff"
+    :collapse="$store.state.isCollapse"
     router
   >
     <el-menu-item index="/">
@@ -26,11 +27,11 @@
       </el-menu-item>
       <el-menu-item index="/product/product_attr">
         <el-icon><IconMenu /></el-icon>
-        商品属性
+        商品规格
       </el-menu-item>
       <el-menu-item index="/product/product_reply">
         <el-icon><IconMenu /></el-icon>
-        商品反馈
+        商品评论
       </el-menu-item>
     </el-sub-menu>
     <el-sub-menu index="/order">
@@ -58,11 +59,15 @@
       </template>
       <el-menu-item index="/permission/role">
         <el-icon><IconMenu /></el-icon>
-        订单列表
+        角色权限
       </el-menu-item>
       <el-menu-item index="/permission/admin">
         <el-icon><IconMenu /></el-icon>
-        线下订单
+        用户权限
+      </el-menu-item>
+      <el-menu-item index="/permission/rule">
+        <el-icon><IconMenu /></el-icon>
+        权限规则
       </el-menu-item>
     </el-sub-menu>
   </el-menu>

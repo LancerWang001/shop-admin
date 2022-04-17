@@ -1,11 +1,13 @@
 <template>
   <div class="common-layout">
     <el-container>
-      <el-aside width="200px">
+      <el-aside>
         <app-menu />
       </el-aside>
       <el-container>
-        <el-header>Header</el-header>
+        <el-header>
+          <app-header />
+        </el-header>
         <el-main>
           <!-- 子路由出口 -->
           <router-view />
@@ -17,6 +19,7 @@
 
 <script setup lang="ts">
 import AppMenu from './components/AppMenu.vue'
+import AppHeader from './components/app-header/index.vue'
 </script>
 
 <style lang="scss" scoped>
@@ -25,11 +28,9 @@ import AppMenu from './components/AppMenu.vue'
   .el-footer,
   .el-aside {
     display: flex;
-    // justify-content: center;
-    // align-items: center;
+    width: auto;
   }
 
-  .el-header,
   .el-footer {
     background-color: var(--el-color-primary-light-7);
     color: var(--el-text-color-primary);
@@ -51,6 +52,16 @@ import AppMenu from './components/AppMenu.vue'
   }
   .el-menu {
     width: 100%;
+    border-right: 0;
+    &:not(.el-menu--collapse) {
+      width: 200px;
+    }
+  }
+
+  .el-header {
+    background-color: #fff;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 </style>

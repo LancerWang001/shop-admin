@@ -13,6 +13,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: AppLayout,
+    meta: {
+      // 自定义路由元数据
+      title: '首页'
+    },
     children: [
       {
         path: '',
