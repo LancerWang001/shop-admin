@@ -4,6 +4,10 @@ import {
   RouteRecordRaw
 } from 'vue-router'
 import AppLayout from '@/layout/AppLayout.vue'
+import productRoute from './modules/product'
+import permissionRoute from './modules/permission'
+import mediaRoute from './modules/media'
+import orderRoute from './modules/order'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -13,8 +17,12 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
-        component: import(/* home */ '../views/home/index.vue')
-      }
+        component: () => import(/* home */ '../views/home/index.vue')
+      },
+      productRoute,
+      permissionRoute,
+      mediaRoute,
+      orderRoute
     ]
   },
   {

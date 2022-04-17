@@ -3,51 +3,68 @@
     active-text-color="#ffd04b"
     background-color="#304156"
     class="el-menu-vertical-demo"
-    default-active="2"
+    :default-active="$route.path"
     text-color="#fff"
+    router
   >
-    <el-sub-menu index="1">
+    <el-menu-item index="/">
+      <el-icon><icon-menu /></el-icon>
+      <span>首页</span>
+    </el-menu-item>
+    <el-sub-menu index="/product">
       <template #title>
         <el-icon><location /></el-icon>
-        <span>Navigator One</span>
+        <span>商品</span>
       </template>
-      <el-menu-item-group title="Group One">
-        <el-menu-item index="1-1">
-          item one
-        </el-menu-item>
-        <el-menu-item index="1-2">
-          item one
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-menu-item-group title="Group Two">
-        <el-menu-item index="1-3">
-          item three
-        </el-menu-item>
-      </el-menu-item-group>
-      <el-sub-menu index="1-4">
-        <template #title>
-          item four
-        </template>
-        <el-menu-item index="1-4-1">
-          item one
-        </el-menu-item>
-      </el-sub-menu>
+      <el-menu-item index="/product/product_list">
+        <el-icon><IconMenu /></el-icon>
+        商品列表
+      </el-menu-item>
+      <el-menu-item index="/product/product_classify">
+        <el-icon><IconMenu /></el-icon>
+        商品分类
+      </el-menu-item>
+      <el-menu-item index="/product/product_attr">
+        <el-icon><IconMenu /></el-icon>
+        商品属性
+      </el-menu-item>
+      <el-menu-item index="/product/product_reply">
+        <el-icon><IconMenu /></el-icon>
+        商品反馈
+      </el-menu-item>
     </el-sub-menu>
-    <el-menu-item index="2">
-      <el-icon><icon-menu /></el-icon>
-      <span>Navigator Two</span>
-    </el-menu-item>
-    <el-menu-item
-      index="3"
-      disabled
-    >
-      <el-icon><document /></el-icon>
-      <span>Navigator Three</span>
-    </el-menu-item>
-    <el-menu-item index="4">
+    <el-sub-menu index="/order">
+      <template #title>
+        <el-icon><location /></el-icon>
+        <span>订单</span>
+      </template>
+      <el-menu-item index="/order/list">
+        <el-icon><IconMenu /></el-icon>
+        订单列表
+      </el-menu-item>
+      <el-menu-item index="/order/offline">
+        <el-icon><IconMenu /></el-icon>
+        线下订单
+      </el-menu-item>
+    </el-sub-menu>
+    <el-menu-item index="/media">
       <el-icon><setting /></el-icon>
-      <span>Navigator Four</span>
+      <span>媒体</span>
     </el-menu-item>
+    <el-sub-menu index="/permission">
+      <template #title>
+        <el-icon><location /></el-icon>
+        <span>权限</span>
+      </template>
+      <el-menu-item index="/permission/role">
+        <el-icon><IconMenu /></el-icon>
+        订单列表
+      </el-menu-item>
+      <el-menu-item index="/permission/admin">
+        <el-icon><IconMenu /></el-icon>
+        线下订单
+      </el-menu-item>
+    </el-sub-menu>
   </el-menu>
 </template>
 
