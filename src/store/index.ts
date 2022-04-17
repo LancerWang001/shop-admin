@@ -1,9 +1,13 @@
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { InjectionKey } from 'vue'
+import { UserInfo } from '@/api/types/common'
+import { setItem, getItem } from '@/utils/storage'
+import { USER } from '@/utils/constant'
 
 const state = {
   count: 0,
-  isCollapse: false
+  isCollapse: false,
+  user: getItem<UserInfo>(USER)
 }
 
 export type State = typeof state
@@ -20,6 +24,10 @@ const store = createStore<State>({
     },
     setIsCollapse (state, payload) {
       state.isCollapse = payload
+    },
+    setUser (state, payload) {
+      state.user = payload
+      setItem(USER, state.user)
     }
   }
 })
