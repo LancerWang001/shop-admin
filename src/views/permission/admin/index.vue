@@ -154,9 +154,10 @@
 
 <script setup lang="ts">
 import { ref, reactive, onMounted } from '@vue/runtime-core'
-import { getAdmins, deleteAdmin } from '@/api/admin'
+import { getAdmins, deleteAdmin, updateAdminStatus } from '@/api/admin'
 import { Admin, ListParams } from '@/api/types/admin'
 import { ElMessage } from 'element-plus'
+import AdminForm from './admin-form.vue'
 
 const listParams = reactive({
   status: '' as ListParams['status'],
@@ -169,7 +170,7 @@ const list = ref<Admin[]>([])
 const listLoading = ref(false)
 const formVisible = ref(false)
 const listCount = ref(0)
-const adminId = ref('')
+const adminId = ref<number | null>(null)
 
 onMounted(() => {
   loadList()
@@ -189,10 +190,18 @@ const handleQuery = () => {
   listParams.page = 1
   loadList()
 }
-const handleStatusChange = (item: Admin) => {
+const handleStatusChange = async (item: Admin) => {
+  try {
+    item.statusLoading = true
+    await updateAdminStatus(item.id, item.status)
+    ElMessage.success(`${item.status === 1 ? '启用' : '禁用'}禁用启用成功`)
+  } finally {
+    item.statusLoading = false
+  }
 }
-const handleUpdate = (id: string) => {
-
+const handleUpdate = (id: number) => {
+  formVisible.value = true
+  adminId.value = id
 }
 const handleDelete = async (id: number) => {
   await deleteAdmin(id)
