@@ -9,17 +9,22 @@ import productRoute from './modules/product'
 import permissionRoute from './modules/permission'
 import mediaRoute from './modules/media'
 import orderRoute from './modules/order'
+import store from '@/store'
 import 'nprogress/nprogress.css'
 
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
     component: AppLayout,
+    meta: {
+      requiresAuth: true
+    },
     children: [
       {
         path: '',
         name: 'home',
-        component: () => import(/* home */ '../views/home/index.vue')
+        component: () => import(/* home */ '../views/home/index.vue'),
+        meta: { title: '首页' }
       },
       productRoute,
       permissionRoute,
@@ -39,8 +44,15 @@ const router = createRouter({
   routes
 })
 
-router.beforeEach(() => {
+router.beforeEach((to) => {
   nprogress.start() // 开始加载进度条
+  const user = store.state.user
+  if (to.meta.requiresAuth && !user) {
+    return {
+      name: 'login',
+      query: { redirect: to.fullPath }
+    }
+  }
 })
 
 router.afterEach(() => {
