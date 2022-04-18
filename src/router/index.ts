@@ -30,7 +30,7 @@ export const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/login',
+    path: '/admin/login',
     name: 'login',
     component: import(/* login */ '../views/login/index.vue')
   },
@@ -48,8 +48,7 @@ const router = createRouter({
 
 router.beforeEach((to) => {
   nprogress.start() // 开始加载进度条
-  const user = store.state.user
-  if (to.meta.requiresAuth && !user) {
+  if (to.meta.requiresAuth && !store.state.user) {
     return {
       name: 'login',
       query: { redirect: to.fullPath }

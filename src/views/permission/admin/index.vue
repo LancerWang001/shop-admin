@@ -153,32 +153,52 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from '@vue/runtime-core'
-import AppCard from '@/components/Card/index.vue'
-import PageContainer from '@/components/PageContainer/index.vue'
-import AppPagination from '@/components/Pagination/index.vue'
+import { ref, reactive, onMounted } from '@vue/runtime-core'
+import { getAdmins, deleteAdmin } from '@/api/admin'
+import { Admin, ListParams } from '@/api/types/admin'
+import { ElMessage } from 'element-plus'
 
-const listParams = ref({
-  status: '',
+const listParams = reactive({
+  status: '' as ListParams['status'],
   name: '',
-  page: 0,
-  limit: 0
+  page: 1,
+  role: '',
+  limit: 10
 })
-const handleQuery = () => {}
-const list = ref([])
+const list = ref<Admin[]>([])
 const listLoading = ref(false)
 const formVisible = ref(false)
 const listCount = ref(0)
-const loadList = () => {}
 const adminId = ref('')
 
-const handleStatusChange = (row: any) => {
+onMounted(() => {
+  loadList()
+})
 
+const loadList = async () => {
+  try {
+    listLoading.value = true
+    const data = await getAdmins(listParams)
+    listCount.value = data.count
+    list.value = data.list
+  } finally {
+    listLoading.value = false
+  }
+}
+const handleQuery = () => {
+  listParams.page = 1
+  loadList()
+}
+const handleStatusChange = (item: Admin) => {
 }
 const handleUpdate = (id: string) => {
 
 }
-const handleDelete = (id: string) => {}
+const handleDelete = async (id: number) => {
+  await deleteAdmin(id)
+  ElMessage.success('删除成功')
+  loadList()
+}
 const handleFormSuccess = () => {}
 </script>
 

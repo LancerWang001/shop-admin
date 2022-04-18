@@ -1,7 +1,7 @@
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { InjectionKey } from 'vue'
 import { UserInfo, Menu } from '@/api/types/common'
-// import createPersistedState from 'vuex-persistedstate'
+import createPersistedState from 'vuex-persistedstate'
 
 const state = {
   isCollapse: false,
@@ -16,7 +16,7 @@ export const key: InjectionKey<Store<State>> = Symbol('store')
 
 // 创建一个新的 store 实例
 const store = createStore<State>({
-  // plugins: [createPersistedState()],
+  plugins: [createPersistedState()],
   state,
   mutations: {
     setIsCollapse (state, payload) {

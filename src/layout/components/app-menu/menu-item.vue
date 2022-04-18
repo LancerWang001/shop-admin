@@ -36,7 +36,6 @@
 import { ref } from '@vue/runtime-core'
 import type { PropType } from '@vue/runtime-core'
 import type { Menu } from '@/api/types/common'
-import AppIcon from '@/components/Icon/index.vue'
 
 const props = defineProps({
   menu: {
