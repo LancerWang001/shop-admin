@@ -1,13 +1,12 @@
 import { createStore, Store, useStore as baseUseStore } from 'vuex'
 import { InjectionKey } from 'vue'
-import { UserInfo } from '@/api/types/common'
-import { setItem, getItem } from '@/utils/storage'
-import { USER } from '@/utils/constant'
+import { UserInfo, Menu } from '@/api/types/common'
+// import createPersistedState from 'vuex-persistedstate'
 
 const state = {
-  count: 0,
   isCollapse: false,
-  user: getItem<UserInfo & { token: string }>(USER)
+  user: null as ({ token: string } & UserInfo) | null,
+  menus: [] as Menu[]
 }
 
 export type State = typeof state
@@ -17,21 +16,26 @@ export const key: InjectionKey<Store<State>> = Symbol('store')
 
 // 创建一个新的 store 实例
 const store = createStore<State>({
+  // plugins: [createPersistedState()],
   state,
   mutations: {
-    increment (state) {
-      state.count++
-    },
     setIsCollapse (state, payload) {
       state.isCollapse = payload
     },
+
     setUser (state, payload) {
       state.user = payload
-      setItem(USER, state.user)
+    },
+
+    setMenus (state, payload) {
+      state.menus = payload
     }
   }
 })
 
-export const useStore = () => baseUseStore(key)
+// 定义自己的 `useStore` 组合式函数
+export function useStore () {
+  return baseUseStore(key)
+}
 
 export default store

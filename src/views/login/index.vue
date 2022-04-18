@@ -83,8 +83,8 @@ const route = useRoute()
 
 const captchaSrc = ref('')
 const user = reactive({
-  account: 'admin',
-  pwd: '123456',
+  account: 'zce',
+  pwd: 'wanglei',
   imgcode: ''
 })
 const loading = ref(false)
@@ -123,6 +123,7 @@ const handleSubmit = async () => {
     ...data.user_info,
     token: data.token
   })
+  store.commit('setMenus', data.menus)
   const redirect = route.query.redirect || '/'
   router.replace(redirect as string)
   // 处理响应

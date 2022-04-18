@@ -1,10 +1,11 @@
 <template>
   <div>
-    媒体
+    附件管理
   </div>
 </template>
 
 <script setup lang="ts">
+
 </script>
 
 <style scoped>

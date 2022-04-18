@@ -6,15 +6,14 @@ import {
 import nprogress from 'nprogress'
 import AppLayout from '@/layout/AppLayout.vue'
 import productRoute from './modules/product'
-import permissionRoute from './modules/permission'
-import mediaRoute from './modules/media'
-import orderRoute from './modules/order'
+import settingRoute from './modules/setting'
+import systemRoute from './modules/system'
 import store from '@/store'
 import 'nprogress/nprogress.css'
 
-const routes: RouteRecordRaw[] = [
+export const routes: RouteRecordRaw[] = [
   {
-    path: '/',
+    path: '/admin',
     component: AppLayout,
     meta: {
       requiresAuth: true
@@ -23,19 +22,22 @@ const routes: RouteRecordRaw[] = [
       {
         path: '',
         name: 'home',
-        component: () => import(/* home */ '../views/home/index.vue'),
-        meta: { title: '首页' }
+        component: () => import(/* home */ '../views/home/index.vue')
       },
       productRoute,
-      permissionRoute,
-      mediaRoute,
-      orderRoute
+      settingRoute,
+      systemRoute
     ]
   },
   {
     path: '/login',
     name: 'login',
     component: import(/* login */ '../views/login/index.vue')
+  },
+  {
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: import(/* 404 */ '../views/error/404.vue')
   }
 ]
 

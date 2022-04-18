@@ -18,7 +18,7 @@
 </template>
 
 <script setup lang="ts">
-import AppMenu from './components/AppMenu.vue'
+import AppMenu from './components/app-menu/index.vue'
 import AppHeader from './components/app-header/index.vue'
 </script>
 
