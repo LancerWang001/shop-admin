@@ -4060,6 +4060,11 @@ vuex@^4.0.2:
   dependencies:
     "@vue/devtools-api" "^6.0.0-beta.11"
 
+vxe-table@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/vxe-table/-/vxe-table-4.2.0.tgz#f3ba3a2164c6264d19f713ed0251ce254bbac812"
+  integrity sha512-ddb4OdTdhjT+E+5gu+NbJuTLJa/BlzUb98O0ZsVwGYUnMWoYqHh68JRkHxFona/Dxv6ir8HBX7kZamfoWhB+NQ==
+
 which-boxed-primitive@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/which-boxed-primitive/-/which-boxed-primitive-1.0.2.tgz#13757bc89b209b049fe5d86430e21cf40a89a8e6"
@@ -4115,6 +4120,11 @@ wrappy@1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/wrappy/-/wrappy-1.0.2.tgz#b5243d8f3ec1aa35f1364605bc0d1036e30ab69f"
   integrity sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=
+
+xe-utils@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.yarnpkg.com/xe-utils/-/xe-utils-3.5.4.tgz#d4335633fede280c68c1c0c9a4c8f3a533cfd831"
+  integrity sha512-oH7VOgvHv34pn198dhKPVKnuEHV22Q06YpCTVnAS3JuutylmZj/rtJGvn0BxxWQ37w2LgCknoebLA4uIGXwFtw==
 
 y18n@^5.0.5:
   version "5.0.8"
