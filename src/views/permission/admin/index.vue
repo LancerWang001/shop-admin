@@ -208,7 +208,10 @@ const handleDelete = async (id: number) => {
   ElMessage.success('删除成功')
   loadList()
 }
-const handleFormSuccess = () => {}
+const handleFormSuccess = () => {
+  formVisible.value = false
+  loadList()
+}
 </script>
 
 <style scoped>

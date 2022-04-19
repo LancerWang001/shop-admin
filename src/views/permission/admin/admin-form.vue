@@ -1,6 +1,7 @@
 <template>
   <app-dialog
     :title="props.adminId ? '编辑管理员' : '添加管理员'"
+    :confirm="handleConfirm"
     @open="handleDialogOpen"
     @close="handleDialogClose"
   >
@@ -86,8 +87,9 @@
 import { ref } from 'vue'
 import type { PropType } from 'vue'
 import type { IElForm, IFormItem } from '@/types/element-plus'
-import { getRoles, getAdmin } from '@/api/admin'
+import { getRoles, getAdmin, createAdmin, editAdmin } from '@/api/admin'
 import { ISelectOptions } from '@/api/types/form'
+import { ElMessage } from 'element-plus'
 
 const props = defineProps({
   adminId: {
@@ -95,7 +97,11 @@ const props = defineProps({
     default: null
   }
 })
-const emit = defineEmits<{(e: 'update:admin-id', value: number | null): void }>()
+type AdminFormEmit = {
+  (e: 'update:admin-id', value: number | null): void
+  (e: 'success'): void
+}
+const emit = defineEmits<AdminFormEmit>()
 
 const formLoading = ref(false)
 const form = ref<IElForm | null>(null)
@@ -151,8 +157,25 @@ const handleDialogClose = () => {
   form.value?.clearValidate() // 清除验证结果
   form.value?.resetFields() // 清除表单数据
 }
+
+// 处理确认事件
+const handleConfirm = async () => {
+  const valid = await form.value?.validate()
+  if (!valid) return
+  if (props.adminId) {
+    // 更新管理员
+    await editAdmin(props.adminId, formData.value)
+  } else {
+    // 添加管理员
+    await createAdmin(formData.value)
+  }
+  emit('success')
+  ElMessage.success('保存成功')
+}
 </script>
 
-<style scoped>
-
+<style>
+.el-popper {
+  z-index: 2020!important;
+}
 </style>
