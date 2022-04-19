@@ -144,12 +144,13 @@
 </template>
 
 <script setup lang="ts">
-import { getMenus } from '@/api/rules'
+import { changeRuleStatus, deleteMenu, getMenus } from '@/api/rules'
 import { Rule, RuleQueryParams } from '@/api/types/rules'
 import { onMounted, reactive, ref } from '@vue/runtime-core'
+import RuleForm from './RuleForm.vue'
 
 const ruleId = ref(0)
-const pid = ref(-1)
+const pid = ref(0)
 const formVisible = ref(false)
 const list = ref<Rule[]>([])
 const listLoading = ref(false)
@@ -170,18 +171,29 @@ const handleQuery = () => {
   loadRules()
 }
 const handleCreate = (id: number) => {
-
+  ruleId.value = id
+  formVisible.value = true
 }
-const handleStatusChange = (item: any) => {
-
+const handleStatusChange = async (item: Rule) => {
+  try {
+    item.statusLoading = true
+    await changeRuleStatus(item.id, item.is_show)
+  } finally {
+    item.statusLoading = false
+  }
 }
 const handleUpdate = (id: number) => {
-
+  formVisible.value = true
+  ruleId.value = id
 }
-const handleDelete = (id: number) => {
-
+const handleDelete = async (id: number) => {
+  await deleteMenu(id)
+  await loadRules()
 }
-const handleFormSuccess = () => {}
+const handleFormSuccess = () => {
+  formVisible.value = false
+  loadRules()
+}
 
 onMounted(() => {
   loadRules()

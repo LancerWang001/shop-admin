@@ -13,7 +13,7 @@ export type Rule = {
   methods: string
   params: string
   sort: number
-  is_show: number
+  is_show: 1 | 0
   is_show_path: number
   access: number
   menu_path: string
@@ -24,6 +24,7 @@ export type Rule = {
   unique_auth: string
   is_del: number
   children?: Rule[]
+  statusLoading?: boolean
 }
 
 /**
