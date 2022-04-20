@@ -19,7 +19,8 @@
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0",
     "vxe-table": "^4.2.0",
-    "xe-utils": "^3.5.4"
+    "xe-utils": "^3.5.4",
+    "xlsx": "0.17.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.2.3",

@@ -69,9 +69,9 @@
       <template #header>
         <el-button
           type="primary"
-          icon="el-icon-plus"
           @click="$router.push('/admin/product/add_product')"
         >
+          <el-icon><plus /></el-icon>
           添加商品
         </el-button>
         <el-button
@@ -87,10 +87,10 @@
           批量下架
         </el-button>
         <el-button
-          icon="el-icon-document"
           :loading="exportExcelLoading"
           @click="handleExportExcel"
         >
+          <el-icon><Document /></el-icon>
           导出表格
         </el-button>
       </template>
@@ -231,7 +231,7 @@ import {
 } from '@/api/types/product'
 import * as productApi from '@/api/product'
 import { IElForm } from '@/types/element-plus'
-import { Search } from '@element-plus/icons-vue'
+import { Search, Document, Plus } from '@element-plus/icons-vue'
 import { onMounted, reactive, ref } from '@vue/runtime-core'
 import { ElMessage } from 'element-plus'
 
@@ -345,7 +345,14 @@ const handleUpdateProductsUnshow = async () => {
   loadList()
 }
 
-const handleExportExcel = () => {}
+const handleExportExcel = async () => {
+  const { jsonToExcel } = await import('@/utils/export-to-excel')
+  jsonToExcel({
+    data: selectionItems.value,
+    header: { id: '编号' },
+    fileName: '测试.xlsx'
+  })
+}
 </script>
 
 <style lang="scss" scoped>
