@@ -124,7 +124,7 @@ const handleSubmit = async () => {
     token: data.token
   })
   store.commit('setMenus', data.menus)
-  const redirect = route.query.redirect || '/'
+  const redirect = route.query.redirect || '/admin'
   router.replace(redirect as string)
   // 处理响应
 }
