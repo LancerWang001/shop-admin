@@ -355,6 +355,12 @@ const handleExportExcel = () => {}
   justify-content: space-between;
 }
 
+:deep(.cell) {
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+}
+
 .demo-table-expand {
   font-size: 0;
   :deep(label) {
