@@ -13,6 +13,15 @@ const routes: RouteRecordRaw = {
   },
   children: [
     {
+      path: 'add_product',
+      name: 'add_product',
+      component: () => import('@/views/product/add/index.vue'),
+      meta: {
+        // 自定义路由元数据
+        title: '添加商品'
+      }
+    },
+    {
       path: 'product_list',
       name: 'product_list',
       component: () => import('@/views/product/list/index.vue'),
