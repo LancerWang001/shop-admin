@@ -30,7 +30,7 @@
         label="其他设置"
         name="others"
       >
-        其他设置
+        <others />
       </el-tab-pane>
     </el-tabs>
   </el-card>
@@ -41,6 +41,7 @@ import { ref } from '@vue/runtime-core'
 import { ArrowLeft } from '@element-plus/icons-vue'
 import ProductInfo from './ProductInfo.vue'
 import ProductDetail from './ProductDetail.vue'
+import Others from './Others.vue'
 
 const activeName = ref('prodInfo')
 </script>
