@@ -30,7 +30,6 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      // 选项写法
       '/admin': {
         target: 'https://shop.fed.lagounews.com/api',
         changeOrigin: true
