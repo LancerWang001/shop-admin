@@ -9,9 +9,15 @@ import productRoute from './modules/product'
 import settingRoute from './modules/setting'
 import systemRoute from './modules/system'
 import store from '@/store'
+import Login from '../views/login/index.vue'
 import 'nprogress/nprogress.css'
 
 export const routes: RouteRecordRaw[] = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
   {
     path: '/admin',
     component: AppLayout,
@@ -30,11 +36,6 @@ export const routes: RouteRecordRaw[] = [
     ]
   },
   {
-    path: '/admin/login',
-    name: 'login',
-    component: import(/* login */ '../views/login/index.vue')
-  },
-  {
     path: '/:pathMatch(.*)*',
     name: '404',
     component: import(/* 404 */ '../views/error/404.vue')
@@ -42,7 +43,7 @@ export const routes: RouteRecordRaw[] = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(), // 路由模式
+  history: createWebHashHistory('/admin'), // 路由模式
   routes
 })
 

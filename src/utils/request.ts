@@ -3,7 +3,9 @@ import { ElMessage, ElMessageBox } from 'element-plus'
 import router from '@/router/'
 import store from '@/store'
 
-const request = axios.create({})
+const request = axios.create({
+  baseURL: import.meta.env.VITE_API_BASEURL
+})
 
 // 请求拦截器
 request.interceptors.request.use((config) => {

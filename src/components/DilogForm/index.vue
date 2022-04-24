@@ -1,6 +1,8 @@
 <template>
   <el-dialog
     ref="dialog"
+    :model-value="props.modelValue"
+    @update:model-value="handleUpdate"
     width="50%"
     :close-on-click-modal="false"
     :close-on-press-escape="false"
@@ -25,11 +27,19 @@ import { ref } from '@vue/runtime-core'
 import type { PropType } from '@vue/runtime-core'
 
 const props = defineProps({
+  modelValue: {
+    type: Boolean,
+    default: false
+  },
   confirm: {
     type: Function as PropType<() => Promise<any>>,
     default: () => Promise.resolve()
   }
 })
+const emit = defineEmits<{(e: 'update:model-value', visible: boolean): void}>()
+const handleUpdate = (isVisible: boolean) => {
+  emit('update:model-value', isVisible)
+}
 const confirmLoading = ref(false)
 const dialog = ref<IElDialog>()
 const handleCancel = () => {
