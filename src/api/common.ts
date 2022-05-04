@@ -34,3 +34,21 @@ export const logout = () => request<LoginResponse>({
   method: 'GET',
   url: '/admin/setting/admin/logout'
 })
+
+// 获取商品图片列表
+export const getImages = (params: {
+  pid: number
+  page: number
+  limit: number
+}) => request({
+  method: 'GET',
+  url: '/admin/file/file',
+  params
+})
+
+// 获取图片种类列表
+export const getImageCate = async (name: string = '') => request({
+  method: 'GET',
+  url: '/admin/file/category',
+  params: { name }
+})

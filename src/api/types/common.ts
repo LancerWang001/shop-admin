@@ -35,3 +35,20 @@ export type LoginResponse = {
   version: string
   newOrderAudioLink: string
 }
+
+// 获取图标列表
+export type ImageFile = {
+  att_dir: string
+  att_id: number
+  att_size: string
+  att_type: string
+  image_type: string
+  module_type: number
+  name: string
+  pid: number
+  real_name: string
+  satt_dir: string
+  time: number
+}
+
+// 图片

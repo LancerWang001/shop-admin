@@ -26,9 +26,12 @@ export const routes: RouteRecordRaw[] = [
     },
     children: [
       {
-        path: '',
+        path: '/admin/home',
         name: 'home',
-        component: () => import(/* home */ '../views/home/index.vue')
+        component: () => import(/* home */ '../views/home/index.vue'),
+        meta: {
+          title: '首页'
+        }
       },
       productRoute,
       settingRoute,
