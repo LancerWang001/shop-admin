@@ -63,6 +63,7 @@
             class="pic"
           >
             <el-image :src="image.satt_dir" />
+            <span class="file-name">{{ image.real_name }}</span>
           </div>
         </div>
         <el-pagination
@@ -70,7 +71,7 @@
           v-model:page-size="pageSize"
           :small="false"
           layout="total, prev, pager, next, jumper"
-          :total="100"
+          :total="total"
           @size-change="handleSizeChange"
           @current-change="handleCurrentChange"
         />
@@ -80,9 +81,10 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import { Plus, Search } from '@element-plus/icons-vue'
 import { ImageFile } from '@/api/types/common'
+import { getImages } from '@/api/common'
 
 const props = defineProps({
   modelValue: {
@@ -102,6 +104,7 @@ const props = defineProps({
 const dialogVisible = ref<boolean>(false)
 const pageSize = ref(21)
 const currentPage = ref(1)
+const total = ref(0)
 const images = ref<ImageFile[]>([])
 
 const editImage = () => {
@@ -118,9 +121,20 @@ const handleCurrentChange = (val: number) => {
   console.log(`current page: ${val}`)
 }
 
-// const loadImages = async () => {
-//   // await getImages({ pid: 0,  })
-// }
+const loadImages = async () => {
+  const { count, list } = await getImages({
+    pid: 0,
+    limit: pageSize.value,
+    page: currentPage.value
+  })
+  images.value = list
+  total.value = count
+}
+
+watch(dialogVisible, (newVal) => {
+  if (newVal) loadImages()
+})
+
 </script>
 
 <style scoped lang="scss">
@@ -180,6 +194,9 @@ const handleCurrentChange = (val: number) => {
 .pics {
   padding-top: 10px;
   height: 300px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: auto;
 }
 
 .pic {
@@ -192,5 +209,17 @@ const handleCurrentChange = (val: number) => {
 .el-pagination {
   justify-content: flex-end;
   padding: 20px;
+}
+
+.el-image {
+  height: 100px;
+  width: 100%;
+}
+
+.file-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
 }
 </style>
